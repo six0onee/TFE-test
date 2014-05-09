@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Flowchart Life | Antoine Gouin</title>
+	
+	<link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+		
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/jquery.slimscroll.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easings.min.js"></script>
+	<script type="text/javascript" src="js/jquery.fullPage.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function() {
+            $.fn.fullpage({
+			    scrollOverflow: true,
+			    afterRender: function(){
+			    	$('#video')[0].play();	    
+			    }
+			});
+
+            function iedetect(v) {
+			    var r = RegExp('msie' + (!isNaN(v) ? ('\\s' + v) : ''), 'i');
+				return r.test(navigator.userAgent);
+					
+			}
+
+
+				// Wait until the video meta data has loaded
+				$('#section0 video').on('loadedmetadata', function() {
+					
+					var $width, $height, // Width and height of screen
+						$vidwidth = this.videoWidth, // Width of video (actual width)
+						$vidheight = this.videoHeight, // Height of video (actual height)
+						$aspectRatio = $vidwidth / $vidheight; // The ratio the video's height and width are in
+								
+					(adjSize = function() { // Create function called adjSize
+									
+						$width = $(window).width(); // Width of the screen
+						$height = $(window).height(); // Height of the screen
+									
+						$boxRatio = $width / $height; // The ratio the screen is in
+									
+						$adjRatio = $aspectRatio / $boxRatio; // The ratio of the video divided by the screen size
+									
+						// Set the container to be the width and height of the screen
+						$('#section0').css({'width' : $width+'px', 'height' : $height+'px'}); 
+									
+						if($boxRatio < $aspectRatio) { // If the screen ratio is less than the aspect ratio..
+							// Set the width of the video to the screen size multiplied by $adjRatio
+							$vid = $('#section0 video').css({'width' : $width*$adjRatio+'px'}); 
+						} else {
+							// Else just set the video to the width of the screen/container
+							$vid = $('#section0 video').css({'width' : $width+'px'});
+						}
+										 
+					})(); // Run function immediately
+								
+					// Run function also on window resize.
+					$(window).resize(adjSize);
+				
+				});
+        });
+    </script>
+
+</head>
+<body>
+<div class="section active" id="section0">
+    <video id="video" autoplay loop muted>
+            <source src="http://antoinegouin.be/video/nuages.webm" type="video/webm" />
+	</video>
+   
+</div>
+<div class="section" id="section1"><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1><h1>Hello fullPage.js</h1></div>
+<div class="section" id="section2"><h1>Just testing it</h1></div>
+<div class="section" id="section3"> <h1>Looks good</h1></div>
+</body>
+</html>
